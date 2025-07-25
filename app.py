@@ -4,9 +4,9 @@ import requests
 app = Flask(__name__)
 
 # === YOUR APP CONFIGURATION ===
-CLIENT_ID = 'YOUR_APP_ID'
-CLIENT_SECRET = 'YOUR_APP_SECRET'
-REDIRECT_URI = 'https://YOUR_HEROKU_APP.herokuapp.com/oauth/callback'
+CLIENT_ID = '35111166170'
+CLIENT_SECRET = '27256412654709c1ffc1db3953ad87da'
+REDIRECT_URI = 'https://facbook-auth-2d80156279a4.herokuapp.com/oauth/callback'
 
 @app.route('/')
 def home():
