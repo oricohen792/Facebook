@@ -15,7 +15,7 @@ def home():
         f"https://www.facebook.com/v19.0/dialog/oauth?"
         f"client_id={CLIENT_ID}"
         f"&redirect_uri={REDIRECT_URI}"
-        f"&scope=instagram_basic,pages_show_list,pages_read_engagement"
+        f"&scope=public_profile"
         f"&response_type=code"
         f"&state=custom_value"
     )
