@@ -1,25 +1,24 @@
-
 from flask import Flask, request
 import requests
 
 app = Flask(__name__)
 
-# ✅ Your real app credentials
 CLIENT_ID = '35111166170'
 CLIENT_SECRET = '27256412654709c1ffc1db3953ad87da'
 REDIRECT_URI = 'https://facbook-auth-2d80156279a4.herokuapp.com/oauth/callback'
 
 @app.route('/')
 def home():
+    scope = request.args.get('scope', '')
     auth_url = (
         f"https://www.facebook.com/v19.0/dialog/oauth?"
         f"client_id={CLIENT_ID}"
         f"&redirect_uri={REDIRECT_URI}"
-        f"&scope=public_profile"
+        f"&scope={scope}"
         f"&response_type=code"
         f"&state=custom_value"
     )
-    return f'<h2>Login with Instagram</h2><a href="{auth_url}"><button>Connect</button></a>'
+    return f'<h2>Login with Instagram</h2><a href="{auth_url}"><button>Connect with scope: {scope}</button></a>'
 
 @app.route('/oauth/callback')
 def oauth_callback():
@@ -29,7 +28,6 @@ def oauth_callback():
 
     print("Received code:", code)
 
-    # ✅ EXACTLY match redirect_uri here
     params = {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,
