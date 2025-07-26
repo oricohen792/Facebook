@@ -3,34 +3,51 @@ import requests
 
 app = Flask(__name__)
 
-CLIENT_ID = '528499633685543'#'1096887979016832'
-CLIENT_SECRET = 'c5a8debd316b5a621602af8010663c96'#'77be6b93bb3114c689c95319014d2202'
 REDIRECT_URI = 'https://facbook-auth-2d80156279a4.herokuapp.com/oauth/callback'
 
 @app.route('/')
 def home():
+    type_ = request.args.get('type', '')
     scope = request.args.get('scope', '')
+
+    if type_ == 'insta':
+        client_id = '528499633685543'
+    elif type_ == 'fb':
+        client_id = '35111166170'
+    else:
+        return "Error: Invalid type. Use '?type=insta' or '?type=fb'."
+
     auth_url = (
         f"https://www.facebook.com/v19.0/dialog/oauth?"
-        f"client_id={CLIENT_ID}"
+        f"client_id={client_id}"
         f"&redirect_uri={REDIRECT_URI}"
         f"&scope={scope}"
         f"&response_type=code"
-        f"&state=custom_value"
+        f"&state={type_}"
     )
-    return f'<h2>Login with Instagram</h2><a href="{auth_url}"><button>Connect with scope: {scope}</button></a>'
+
+    return f'<h2>Login with {type_.upper()}</h2><a href="{auth_url}"><button>Connect with scope: {scope}</button></a>'
 
 @app.route('/oauth/callback')
 def oauth_callback():
     code = request.args.get('code')
-    if not code:
-        return "Error: No code provided."
+    state = request.args.get('state')  # determines if it was 'insta' or 'fb'
 
-    print("Received code:", code)
+    if not code or not state:
+        return "Error: Missing code or state."
+
+    if state == 'insta':
+        client_id = '528499633685543'
+        client_secret = 'c5a8debd316b5a621602af8010663c96'
+    elif state == 'fb':
+        client_id = '35111166170'
+        client_secret = '27256412654709c1ffc1db3953ad87da'
+    else:
+        return "Error: Unknown state."
 
     params = {
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
+        'client_id': client_id,
+        'client_secret': client_secret,
         'redirect_uri': REDIRECT_URI,
         'code': code
     }
