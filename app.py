@@ -3,8 +3,8 @@ import requests
 
 app = Flask(__name__)
 
-CLIENT_ID = '1096887979016832'
-CLIENT_SECRET = '77be6b93bb3114c689c95319014d2202'
+CLIENT_ID = '1793334478263507'
+CLIENT_SECRET = 'cac68ca88ee7f654de4608f4f60e2602'
 REDIRECT_URI = 'https://facbook-auth-2d80156279a4.herokuapp.com/oauth/callback'
 
 @app.route('/')
