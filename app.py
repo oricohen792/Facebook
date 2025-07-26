@@ -18,7 +18,7 @@ def home():
         return "Error: Invalid type. Use '?type=insta' or '?type=fb'."
 
     auth_url = (
-        f"https://www.facebook.com/v19.0/dialog/oauth?"
+        f"https://api.instagram.com/oauth/authorize?"
         f"client_id={client_id}"
         f"&redirect_uri={REDIRECT_URI}"
         f"&scope={scope}"
@@ -52,7 +52,7 @@ def oauth_callback():
         'code': code
     }
 
-    response = requests.get('https://graph.facebook.com/v19.0/oauth/access_token', params=params)
+    response = requests.get('https://api.instagram.com/oauth/authorize/access_token', params=params)
     data = response.json()
 
     if 'access_token' in data:
