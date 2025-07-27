@@ -14,7 +14,7 @@ def home():
         client_id = '528499633685543'
     elif type_ == 'fb':
         client_id = '35111166170'
-    elif state == "mes":
+    elif type_ == "mes":
         client_id = '871910364873092'
 
     else:
