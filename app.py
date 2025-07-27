@@ -42,6 +42,10 @@ def oauth_callback():
     elif state == 'fb':
         client_id = '35111166170'
         client_secret = '27256412654709c1ffc1db3953ad87da'
+    elif state="mes":
+        client_id = '871910364873092'
+        client_secret = 'e64543dd308e53e6bfd3cd883b8da4c8'
+        
     else:
         return "Error: Unknown state."
 
